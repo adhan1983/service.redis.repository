@@ -27,7 +27,7 @@ namespace AOM.Redis.Service.API
                 c.CustomSchemaIds(i => i.FullName);                
             });
             
-            var redis = ConnectionMultiplexer.Connect("redis-003.kuk7ny.0001.use2.cache.amazonaws.com");
+            var redis = ConnectionMultiplexer.Connect("localhost");
             
             services.AddScoped<IDatabase>(rd => redis.GetDatabase());
 

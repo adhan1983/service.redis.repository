@@ -26,9 +26,9 @@ namespace AOM.Redis.Service.API.Controllers
         {
             var rng = new Random();
 
-            var _value = _database.StringSet("nilda", "oliveira");
+            var _value = _database.StringSet("", "");
             
-            _database.StringGet("");
+            var name = _database.StringGet("");
 
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
