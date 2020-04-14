@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AOM.Redis.Service.API", "AOM.Redis.Service.API\AOM.Redis.Service.API.csproj", "{9F365D34-4041-42BA-AB8B-6B95B36A1565}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AOM.Redis.Service.DataAccess", "AOM.Redis.Service.DataAccess\AOM.Redis.Service.DataAccess.csproj", "{AEEB0C06-0C30-40FC-8FA6-7F31C773E8AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9F365D34-4041-42BA-AB8B-6B95B36A1565}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F365D34-4041-42BA-AB8B-6B95B36A1565}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F365D34-4041-42BA-AB8B-6B95B36A1565}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEEB0C06-0C30-40FC-8FA6-7F31C773E8AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEEB0C06-0C30-40FC-8FA6-7F31C773E8AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEEB0C06-0C30-40FC-8FA6-7F31C773E8AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEEB0C06-0C30-40FC-8FA6-7F31C773E8AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

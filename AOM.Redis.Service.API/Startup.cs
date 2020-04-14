@@ -1,3 +1,4 @@
+using AOM.Redis.Service.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -10,9 +11,14 @@ namespace AOM.Redis.Service.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+            Configuration = builder.Build();
         }
         public IConfiguration Configuration { get; }        
         public void ConfigureServices(IServiceCollection services)
@@ -26,14 +32,22 @@ namespace AOM.Redis.Service.API
                 c.DocumentFilterDescriptors.AsReadOnly();
                 c.CustomSchemaIds(i => i.FullName);                
             });
+
+            services.Configure<RedisConfiguration>(Configuration.GetSection("redis"));
+
+            services.AddDistributedRedisCache(options =>
+            {
+                options.InstanceName = Configuration.GetValue<string>("redis:name");
+                options.Configuration = Configuration.GetValue<string>("redis:host");
+            });            
             
-            var redis = ConnectionMultiplexer.Connect("localhost");
-            
-            services.AddScoped<IDatabase>(rd => redis.GetDatabase());
+            services.AddSingleton<IRedisConnectionFactory, RedisConnectionFactory>();
+
+            //var redis = ConnectionMultiplexer.Connect("localhost");            
+            //services.AddScoped<IDatabase>(rd => redis.GetDatabase());
 
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
